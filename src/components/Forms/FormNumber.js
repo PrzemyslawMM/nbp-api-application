@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useStateContext } from '../../contexts/ContextProvider';
 
 export const Input = styled.input`
   border: none;
@@ -17,13 +18,13 @@ export const Input = styled.input`
 `;
 
 const FormNumber = ({ placeholder }) => {
-  const [currentValue, setCurrentValue] = useState();
+  const { currentNumberValue, setCurrentNumberValue } = useStateContext();
 
   const handleChange = (e) => {
     if (e.target.value < 0) {
       return;
     }
-    setCurrentValue(e.target.value);
+    setCurrentNumberValue(e.target.value);
   };
 
   return (
@@ -31,7 +32,7 @@ const FormNumber = ({ placeholder }) => {
       type="text"
       placeholder={placeholder}
       onChange={handleChange}
-      value={currentValue}
+      value={currentNumberValue}
     />
   );
 };

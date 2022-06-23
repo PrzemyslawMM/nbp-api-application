@@ -12,6 +12,7 @@ const FormDate = ({ label }) => {
       return;
     }
     setCurrentDateValue(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
