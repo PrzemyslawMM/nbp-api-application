@@ -7,7 +7,7 @@ const Table = () => {
   const { currentNumberValue } = useStateContext();
   const { rates } = apiResponse;
   return (
-    <Wrapper>
+    <Wrapper number={currentNumberValue}>
       <thead>
         <tr>
           <TableItem as="th">Currency</TableItem>

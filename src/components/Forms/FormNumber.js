@@ -24,12 +24,13 @@ const FormNumber = ({ placeholder }) => {
     if (e.target.value < 0) {
       return;
     }
-    setCurrentNumberValue(e.target.value);
+    // eslint-disable-next-line no-unused-expressions
+    e.target.value ? setCurrentNumberValue(e.target.value) : 0;
   };
 
   return (
     <Input
-      type="text"
+      type="number"
       placeholder={placeholder}
       onChange={handleChange}
       value={currentNumberValue}

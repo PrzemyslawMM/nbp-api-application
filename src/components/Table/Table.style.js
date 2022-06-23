@@ -13,7 +13,9 @@ export const Wrapper = styled.table`
   margin-top: 15px;
   border: 1px solid black;
   border-collapse: collapse;
-  animation: ${Appear} 0.5s;
+  opacity: ${({ number }) => (number === '0' ? 0 : 1)};
+  transition: opacity 0.5s ease-in-out;
+  animation: ${Appear} 0.5s ease-in-out;
 `;
 
 export const TableItem = styled.td`
