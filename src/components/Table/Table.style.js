@@ -13,9 +13,13 @@ export const Wrapper = styled.table`
   margin-top: 15px;
   border: 1px solid black;
   border-collapse: collapse;
-  opacity: ${({ number }) => (number === '0' ? 0 : 1)};
+  opacity: 0;
   transition: opacity 0.5s ease-in-out;
   animation: ${Appear} 0.5s ease-in-out;
+
+  .start & {
+    opacity: 1;
+  }
 `;
 
 export const TableItem = styled.td`

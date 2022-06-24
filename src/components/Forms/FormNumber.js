@@ -18,14 +18,16 @@ export const Input = styled.input`
 `;
 
 const FormNumber = ({ placeholder }) => {
-  const { currentNumberValue, setCurrentNumberValue } = useStateContext();
+  const { currentNumberValue, setCurrentNumberValue, setStart } =
+    useStateContext();
 
   const handleChange = (e) => {
     if (e.target.value < 0) {
       return;
     }
-    // eslint-disable-next-line no-unused-expressions
-    e.target.value ? setCurrentNumberValue(e.target.value) : 0;
+    // e.target.value ? setCurrentNumberValue(e.target.value) : 0;
+    setCurrentNumberValue(e.target.value);
+    setStart(true);
   };
 
   return (

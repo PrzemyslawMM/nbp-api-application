@@ -10,6 +10,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export const ContextProvider = ({ children }) => {
   const [currentNumberValue, setCurrentNumberValue] = useState();
   const [currentDateValue, setCurrentDateValue] = useState();
+  const [start, setStart] = useState(false);
   const [apiResponse, setApiResponse] = useState({});
   const { data } = useSWR(
     'http://api.nbp.pl/api/exchangerates/tables/A/?format=json',
@@ -36,6 +37,8 @@ export const ContextProvider = ({ children }) => {
         setCurrentDateValue,
         setCurrentNumberValue,
         apiResponse,
+        start,
+        setStart,
       }}
     >
       {children}
