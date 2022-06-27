@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useStateContext } from '../../contexts/ContextProvider';
@@ -18,16 +18,13 @@ export const Input = styled.input`
 `;
 
 const FormNumber = ({ placeholder }) => {
-  const { currentNumberValue, setCurrentNumberValue, setStart } =
-    useStateContext();
+  const { currentNumberValue, setCurrentNumberValue } = useStateContext();
 
   const handleChange = (e) => {
     if (e.target.value < 0) {
       return;
     }
-    // e.target.value ? setCurrentNumberValue(e.target.value) : 0;
     setCurrentNumberValue(e.target.value);
-    setStart(true);
   };
 
   return (

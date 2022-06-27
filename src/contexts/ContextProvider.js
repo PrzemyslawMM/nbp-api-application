@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
+import axios from 'axios';
 
 const StateContext = createContext();
 
@@ -8,7 +9,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 // eslint-disable-next-line react/prop-types
 export const ContextProvider = ({ children }) => {
-  const [currentNumberValue, setCurrentNumberValue] = useState();
+  const [currentNumberValue, setCurrentNumberValue] = useState(null);
   const [currentDateValue, setCurrentDateValue] = useState();
   const [start, setStart] = useState(false);
   const [apiResponse, setApiResponse] = useState({});
@@ -25,9 +26,22 @@ export const ContextProvider = ({ children }) => {
       const year = Date.substring(0, 4);
       const month = Date.substring(5, 7);
       const day = Date.substring(8);
-      setCurrentDateValue(`${year}-${month}-${day}`);
+      const SetDate = `${year}-${month}-${day}`;
+      setCurrentDateValue(SetDate);
+      setStart(true);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (currentDateValue) {
+      axios
+        .get(
+          `http://api.nbp.pl/api/exchangerates/tables/A/${currentDateValue}/?format=json`
+        )
+        .then((res) => setApiResponse(...res.data))
+        .catch(() => setApiResponse(null));
+    }
+  }, [currentDateValue]);
 
   return (
     <StateContext.Provider

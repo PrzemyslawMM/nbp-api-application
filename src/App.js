@@ -1,18 +1,25 @@
 import React from 'react';
 import FormNumber from './components/Forms/FormNumber';
 import FormDate from './components/Forms/FormDate';
-import { Wrapper } from './App.style';
+import { Red, Wrapper } from './App.style';
 import Table from './components/Table/Table';
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
-  const { apiResponse, currentNumberValue, start } = useStateContext();
+  const { apiResponse, start } = useStateContext();
   return (
-    <Wrapper className={currentNumberValue === '' ? null : 'start'}>
+    <Wrapper>
       <p>NBP api application</p>
       <FormNumber placeholder="Set amount of PLN" />
       <FormDate label="Effective Date of money" />
-      {(apiResponse && currentNumberValue) || start ? <Table /> : null}
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {apiResponse && start ? (
+        <Table />
+      ) : apiResponse === null ? (
+        <Red>No data</Red>
+      ) : (
+        <p>Loading...</p>
+      )}
     </Wrapper>
   );
 };
